@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guan Heng Bak Kut Teh 源興肉骨茶 — Klang since 1962</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;700;900&family=Noto+Serif+SC:wght@600;900&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --broth-black:#1c1410;
+    --broth-brown:#3e2617;
+    --amber:#c87f3a;
+    --amber-bright:#e0994f;
+    --parchment:#e8d9be;
+    --sage:#6b7a54;
+    --chop-red:#a63a2e;
+    --line: rgba(232,217,190,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--broth-black);
+    color:var(--parchment);
+    font-family:'Work Sans', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+  a{color:inherit;}
+  h1,h2,h3{font-family:'Bitter', serif; font-weight:700; letter-spacing:-0.01em;}
+  .zh{font-family:'Noto Serif SC', serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  /* ===== NAV ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 5vw;
+    background:linear-gradient(to bottom, rgba(28,20,16,0.95), rgba(28,20,16,0));
+    transition:background 0.3s ease;
+  }
+  header.scrolled{ background:rgba(28,20,16,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Bitter', serif; font-weight:700; font-size:1.1rem; text-decoration:none;}
+  .brand .seal{
+    width:34px; height:34px; border-radius:50%; border:2px solid var(--chop-red);
+    display:flex; align-items:center; justify-content:center; color:var(--chop-red);
+    font-family:'Noto Serif SC', serif; font-size:0.85rem; font-weight:900; flex-shrink:0;
+  }
+  nav ul{list-style:none; display:flex; gap:36px;}
+  nav a{ text-decoration:none; font-size:0.92rem; letter-spacing:0.02em; position:relative; padding-bottom:4px;}
+  nav a::after{content:''; position:absolute; left:0; bottom:0; height:1px; width:0; background:var(--amber); transition:width 0.25s ease;}
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--parchment); font-size:1.6rem; cursor:pointer;}
+
+  @media (max-width:820px){
+    nav ul{ position:fixed; top:0; right:0; height:100vh; width:min(70vw,300px);
+      background:var(--broth-brown); flex-direction:column; padding:100px 32px; gap:28px;
+      transform:translateX(100%); transition:transform 0.35s ease; box-shadow:-10px 0 30px rgba(0,0,0,0.4);}
+    nav ul.open{transform:translateX(0);}
+    .nav-toggle{display:block;}
+  }
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:120px 5vw 80px; overflow:hidden;
+    background:
+      radial-gradient(ellipse at 50% 110%, rgba(200,127,58,0.28), transparent 60%),
+      var(--broth-black);
+  }
+  .steam{position:absolute; bottom:0; left:50%; width:600px; height:100%; transform:translateX(-50%); pointer-events:none;}
+  .wisp{
+    position:absolute; bottom:10%; width:2px; background:linear-gradient(to top, rgba(232,217,190,0), rgba(232,217,190,0.35), rgba(232,217,190,0));
+    border-radius:50%; filter:blur(3px);
+    animation:rise 7s ease-in infinite;
+  }
+  @keyframes rise{
+    0%{ height:0%; opacity:0; transform:translateX(0) scaleX(1);}
+    15%{opacity:0.8;}
+    100%{ height:75%; opacity:0; transform:translateX(30px) scaleX(3);}
+  }
+  .hero-inner{position:relative; z-index:2; max-width:820px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--amber-bright); margin-bottom:22px; display:flex; align-items:center; justify-content:center; gap:14px;
+  }
+  .eyebrow::before, .eyebrow::after{content:''; width:36px; height:1px; background:var(--amber-bright); opacity:0.5;}
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.4rem); line-height:1.02; color:var(--parchment);
+    text-shadow:0 20px 60px rgba(0,0,0,0.5);
+  }
+  .hero h1 .zh{ display:block; font-size:1.15em; color:var(--amber-bright); margin-bottom:6px; }
+  .hero p.lede{ font-size:1.15rem; color:rgba(232,217,190,0.78); max-width:560px; margin:26px auto 40px; font-weight:300;}
+  .btn-row{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; padding:15px 30px; border-radius:2px;
+    font-size:0.92rem; letter-spacing:0.03em; text-decoration:none; font-weight:500;
+    border:1px solid transparent; transition:transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary{ background:var(--amber); color:var(--broth-black); font-weight:600;}
+  .btn-primary:hover{ background:var(--amber-bright); transform:translateY(-2px);}
+  .btn-ghost{ border-color:rgba(232,217,190,0.35); color:var(--parchment);}
+  .btn-ghost:hover{ border-color:var(--parchment); transform:translateY(-2px);}
+
+  /* ===== SECTION SHELL ===== */
+  section{ padding:120px 5vw; position:relative;}
+  .section-head{ max-width:640px; margin-bottom:64px;}
+  .section-head .eyebrow{ justify-content:flex-start;}
+  .section-head .eyebrow::after{display:none;}
+  .section-head h2{ font-size:clamp(2rem, 4vw, 3rem); color:var(--parchment);}
+  .section-head p{ color:rgba(232,217,190,0.68); margin-top:16px; font-size:1.05rem; font-weight:300; max-width:520px;}
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in{ opacity:1; transform:translateY(0);}
+
+  /* ===== STORY ===== */
+  .story{ background:var(--broth-brown); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .story-grid{ display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; max-width:1180px; margin:0 auto;}
+  .story-grid p{ color:rgba(232,217,190,0.82); font-weight:300; font-size:1.05rem; margin-bottom:18px;}
+  .pot-wrap{ display:flex; justify-content:center;}
+  .pot{ width:260px; height:260px; position:relative;}
+  .pot svg{width:100%; height:100%;}
+  @media (max-width:900px){ .story-grid{grid-template-columns:1fr; gap:40px;} }
+
+  /* ===== MENU (prescription slips) ===== */
+  .menu-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:28px; max-width:1180px; margin:0 auto;}
+  .slip{
+    background:#241a13; border:1px solid var(--line); border-radius:2px; padding:30px 26px 26px;
+    position:relative; transition:transform 0.25s ease, border-color 0.25s ease;
+  }
+  .slip:hover{ transform:translateY(-6px); border-color:rgba(200,127,58,0.5);}
+  .slip::before{
+    content:''; position:absolute; top:-1px; left:0; right:0; height:10px;
+    background-image:radial-gradient(circle at 10px 5px, var(--broth-black) 5px, transparent 5.5px);
+    background-size:20px 10px; background-repeat:repeat-x;
+  }
+  .slip-head{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; border-bottom:1px dashed var(--line); padding-bottom:14px;}
+  .slip-head h3{ font-size:1.25rem; color:var(--parchment);}
+  .slip-head .zh-small{ font-family:'Noto Serif SC',serif; font-size:0.85rem; color:var(--amber-bright); display:block; margin-top:4px; font-weight:600;}
+  .price{ font-family:'IBM Plex Mono', monospace; font-size:1.15rem; color:var(--amber-bright); white-space:nowrap; margin-left:12px;}
+  .slip p.desc{ font-size:0.92rem; color:rgba(232,217,190,0.68); font-weight:300; margin-bottom:16px;}
+  .slip .tag{
+    display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--sage); border:1px solid var(--sage); padding:3px 8px; border-radius:20px;
+  }
+
+  /* ===== HERBS / APOTHECARY ===== */
+  .herbs{ background:var(--broth-black);}
+  .herb-list{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:0; max-width:1180px; margin:0 auto; border-top:1px solid var(--line);}
+  .herb-item{ padding:28px 20px; border-bottom:1px solid var(--line); border-right:1px solid var(--line); position:relative;}
+  .herb-item .num{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--amber); display:block; margin-bottom:10px;}
+  .herb-item h4{ font-family:'Bitter',serif; font-size:1.1rem; margin-bottom:6px; color:var(--parchment);}
+  .herb-item .zh-small{ font-family:'Noto Serif SC',serif; color:rgba(232,217,190,0.5); font-size:0.85rem; margin-bottom:10px; display:block;}
+  .herb-item p{ font-size:0.88rem; color:rgba(232,217,190,0.6); font-weight:300;}
+
+  .chop{
+    position:absolute; top:24px; right:24px; width:56px; height:56px; border-radius:6px;
+    border:2px solid var(--chop-red); color:var(--chop-red); display:flex; align-items:center; justify-content:center;
+    font-family:'Noto Serif SC',serif; font-weight:900; font-size:1.4rem; transform:rotate(-8deg) scale(0.4); opacity:0;
+    transition:transform 0.5s cubic-bezier(.2,1.4,.4,1), opacity 0.4s ease;
+  }
+  .chop.stamped{ transform:rotate(-8deg) scale(1); opacity:0.85;}
+
+  /* ===== VISIT ===== */
+  .visit{ background:var(--broth-brown); border-top:1px solid var(--line);}
+  .visit-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px; max-width:1180px; margin:0 auto;}
+  .info-row{ display:flex; gap:20px; padding:20px 0; border-bottom:1px solid var(--line);}
+  .info-row:first-child{ border-top:1px solid var(--line);}
+  .info-row .label{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--amber-bright); width:110px; flex-shrink:0; padding-top:2px;}
+  .info-row .value{ color:rgba(232,217,190,0.85); font-weight:300;}
+  .map-card{
+    background:var(--broth-black); border:1px solid var(--line); padding:36px; display:flex; flex-direction:column;
+    justify-content:center; gap:18px;
+  }
+  .map-card h3{ font-size:1.3rem; color:var(--parchment);}
+  .map-card p{ color:rgba(232,217,190,0.65); font-size:0.95rem; font-weight:300;}
+  @media (max-width:900px){ .visit-grid{grid-template-columns:1fr;} }
+
+  /* ===== FOOTER ===== */
+  footer{ padding:50px 5vw; text-align:center; border-top:1px solid var(--line); color:rgba(232,217,190,0.45); font-size:0.85rem;}
+  footer .zh{ color:var(--amber); font-size:1.1rem; display:block; margin-bottom:10px;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <a href="#top" class="brand"><span class="seal">源</span> Guan Heng</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+  <nav><ul id="navList">
+    <li><a href="#story">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#herbs">The Broth</a></li>
+    <li><a href="#visit">Visit Us</a></li>
+  </ul></nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="steam" id="steamField"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Klang, Selangor · Est. 1962</div>
+    <h1><span class="zh">源興肉骨茶</span>Guan Heng Bak Kut Teh</h1>
+    <p class="lede">Pork ribs, dark soy, and a herbal broth simmered low since five in the morning. Same recipe, same clay pots, three generations running.</p>
+    <div class="btn-row">
+      <a href="#menu" class="btn btn-primary">See the Menu</a>
+      <a href="#visit" class="btn btn-ghost">Find Us</a>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-grid">
+    <div class="reveal">
+      <div class="eyebrow">Our Story</div>
+      <h2 style="margin-bottom:22px;">Three generations, one pot</h2>
+      <p>My grandfather sold bak kut teh from a pushcart near the old Klang wet market, ladling broth into tins for dock workers heading to their morning shift. He never wrote the recipe down — it lived in his hands, in how dark the soy should go and how long the herbs should sit.</p>
+      <p>We still cook it his way: whole garlic bulbs, a hand-tied herbal packet, and ribs that simmer until the bone gives without asking. No shortcuts, no MSG, no rushing a pot that wants six hours.</p>
+    </div>
+    <div class="pot-wrap reveal">
+      <div class="pot">
+        <svg viewBox="0 0 200 200" fill="none">
+          <ellipse cx="100" cy="170" rx="70" ry="10" fill="#000" opacity="0.3"/>
+          <path d="M40 90 Q40 160 100 160 Q160 160 160 90 L155 90 Q150 145 100 145 Q50 145 45 90 Z" fill="#2a1c13" stroke="#5a4331" stroke-width="2"/>
+          <ellipse cx="100" cy="90" rx="60" ry="14" fill="#c87f3a" opacity="0.9"/>
+          <ellipse cx="100" cy="90" rx="60" ry="14" fill="none" stroke="#6b7a54" stroke-width="2" opacity="0.6"/>
+          <rect x="20" y="82" width="14" height="10" rx="3" fill="#5a4331"/>
+          <rect x="166" y="82" width="14" height="10" rx="3" fill="#5a4331"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="section-head reveal">
+    <div class="eyebrow">The Menu</div>
+    <h2>Bowls worth queuing for</h2>
+    <p>Every set comes with rice, a pot of tea, and as many refills of broth as you can manage.</p>
+  </div>
+  <div class="menu-grid">
+
+    <div class="slip reveal">
+      <div class="slip-head">
+        <div><h3>Signature Rib Set</h3><span class="zh-small">招牌排骨</span></div>
+        <div class="price">RM 16.90</div>
+      </div>
+      <p class="desc">Three prime ribs, slow-simmered six hours in our house herbal blend. The one people drive back for.</p>
+      <span class="tag">Best Seller</span>
+    </div>
+
+    <div class="slip reveal">
+      <div class="slip-head">
+        <div><h3>Mixed Meat Bowl</h3><span class="zh-small">綜合肉骨茶</span></div>
+        <div class="price">RM 18.50</div>
+      </div>
+      <p class="desc">Ribs, pork belly, and tofu puffs that soak up the broth like nothing else on the table.</p>
+      <span class="tag">House Favorite</span>
+    </div>
+
+    <div class="slip reveal">
+      <div class="slip-head">
+        <div><h3>Pork Trotter Set</h3><span class="zh-small">豬蹄肉骨茶</span></div>
+        <div class="price">RM 17.90</div>
+      </div>
+      <p class="desc">Braised trotter, fall-apart tender, for those who want more collagen than broth.</p>
+      <span class="tag">Rich &amp; Hearty</span>
+    </div>
+
+    <div class="slip reveal">
+      <div class="slip-head">
+        <div><h3>Yau Char Kway</h3><span class="zh-small">油炸鬼</span></div>
+        <div class="price">RM 3.50</div>
+      </div>
+      <p class="desc">Fried dough sticks, made fresh each morning, for dunking straight into the pot.</p>
+      <span class="tag">Side</span>
+    </div>
+
+    <div class="slip reveal">
+      <div class="slip-head">
+        <div><h3>Braised Beancurd</h3><span class="zh-small">滷豆腐</span></div>
+        <div class="price">RM 6.00</div>
+      </div>
+      <p class="desc">Firm beancurd braised in the same dark broth, a quiet counterpoint to the meat.</p>
+      <span class="tag">Side</span>
+    </div>
+
+    <div class="slip reveal">
+      <div class="slip-head">
+        <div><h3>Chinese Tea Pot</h3><span class="zh-small">中國茶</span></div>
+        <div class="price">RM 2.50</div>
+      </div>
+      <p class="desc">Bitter tieguanyin, poured to cut the richness between bowls. Bottomless with any set.</p>
+      <span class="tag">Drink</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="herbs" id="herbs">
+  <div class="section-head reveal">
+    <div class="eyebrow">The Broth</div>
+    <h2>What goes into the packet</h2>
+    <p>Sourced weekly from the same herbalist my grandfather used. Every packet is still hand-tied, not machine-sealed.</p>
+  </div>
+  <div class="herb-list">
+
+    <div class="herb-item reveal">
+      <span class="num">01</span>
+      <h4>Dang Gui</h4>
+      <span class="zh-small">當歸</span>
+      <p>Angelica root, for the broth's faint sweetness and depth.</p>
+      <div class="chop">源</div>
+    </div>
+
+    <div class="herb-item reveal">
+      <span class="num">02</span>
+      <h4>Yu Zhu</h4>
+      <span class="zh-small">玉竹</span>
+      <p>Solomon's seal, softening the bitterness of the darker roots.</p>
+      <div class="chop">興</div>
+    </div>
+
+    <div class="herb-item reveal">
+      <span class="num">03</span>
+      <h4>Whole Garlic</h4>
+      <span class="zh-small">蒜頭</span>
+      <p>An entire bulb per pot, simmered until it turns soft and sweet.</p>
+      <div class="chop">正</div>
+    </div>
+
+    <div class="herb-item reveal">
+      <span class="num">04</span>
+      <h4>White Peppercorn</h4>
+      <span class="zh-small">白胡椒</span>
+      <p>Cracked, not ground — for a slow building heat rather than a sharp one.</p>
+      <div class="chop">宗</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="visit-grid">
+    <div class="reveal">
+      <div class="eyebrow">Visit Us</div>
+      <h2 style="margin-bottom:8px;">Come hungry, come early</h2>
+      <div class="info-row">
+        <div class="label">Address</div>
+        <div class="value">12, Jalan Besar, 41000 Klang, Selangor, Malaysia</div>
+      </div>
+      <div class="info-row">
+        <div class="label">Hours</div>
+        <div class="value">Tue–Sun, 6:30am – 2:00pm<br>Closed on Mondays</div>
+      </div>
+      <div class="info-row">
+        <div class="label">Phone</div>
+        <div class="value">+60 3-1234 5678</div>
+      </div>
+      <div class="info-row">
+        <div class="label">Parking</div>
+        <div class="value">Street parking along Jalan Besar; coupon required 8am–6pm</div>
+      </div>
+    </div>
+    <div class="map-card reveal">
+      <h3>Get there before the pots run dry</h3>
+      <p>We cook one batch a day, starting at 5am. On weekends, the rib sets are usually gone by 11.</p>
+      <a href="tel:+60312345678" class="btn btn-primary" style="align-self:flex-start;">Call to Reserve</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="zh">源興肉骨茶</span>
+  Guan Heng Bak Kut Teh · Klang, Selangor · Since 1962
+</footer>
+
+<script>
+  // header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // mobile nav
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  // steam wisps
+  const steamField = document.getElementById('steamField');
+  for(let i=0;i<7;i++){
+    const w = document.createElement('div');
+    w.className = 'wisp';
+    const left = 50 + (Math.random()*160 - 80);
+    w.style.left = left + 'px';
+    w.style.animationDelay = (Math.random()*7) + 's';
+    w.style.animationDuration = (6 + Math.random()*3) + 's';
+    steamField.appendChild(w);
+  }
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const chops = document.querySelectorAll('.chop');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+
+  const chopIo = new IntersectionObserver((entries) => {
+    entries.forEach((e,idx) => {
+      if(e.isIntersecting){
+        setTimeout(()=> e.target.classList.add('stamped'), 150);
+        chopIo.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.4});
+  chops.forEach(c => chopIo.observe(c));
+</script>
+
+</body>
+</html>

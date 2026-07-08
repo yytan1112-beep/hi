@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Roost Chicken</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #20130c;
+      --muted: #6d5b50;
+      --cream: #fff8ed;
+      --paper: #fffdf8;
+      --gold: #f4a51c;
+      --red: #b73521;
+      --green: #3d7a4b;
+      --line: #ecd8bf;
+      --shadow: 0 18px 45px rgba(75, 42, 18, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px clamp(18px, 5vw, 72px);
+      background: rgba(255, 248, 237, 0.92);
+      border-bottom: 1px solid rgba(236, 216, 191, 0.75);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.08rem;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      color: #fff;
+      background: var(--red);
+      border-radius: 10px;
+      box-shadow: 0 10px 24px rgba(183, 53, 33, 0.25);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--red);
+    }
+
+    .order-link,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 20px;
+      color: #fff;
+      background: var(--red);
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: 0 12px 26px rgba(183, 53, 33, 0.22);
+    }
+
+    .order-link:hover,
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.86fr);
+      gap: clamp(30px, 5vw, 76px);
+      align-items: center;
+      min-height: calc(100vh - 71px);
+      padding: clamp(40px, 7vw, 92px) clamp(18px, 5vw, 72px);
+      background:
+        radial-gradient(circle at 20% 15%, rgba(244, 165, 28, 0.22), transparent 32%),
+        linear-gradient(135deg, #fff8ed 0%, #ffe8c9 100%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      color: #7d2a1b;
+      background: rgba(183, 53, 33, 0.1);
+      border: 1px solid rgba(183, 53, 33, 0.18);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.8rem, 8vw, 6.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+    }
+
+    .hero p {
+      max-width: 610px;
+      margin: 24px 0 28px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.22rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .button.secondary {
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .hero-card {
+      overflow: hidden;
+      align-self: stretch;
+      min-height: 520px;
+      background: var(--paper);
+      border: 1px solid rgba(236, 216, 191, 0.8);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-image {
+      height: 72%;
+      min-height: 360px;
+    }
+
+    .hero-note {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      padding: 24px;
+    }
+
+    .price {
+      color: var(--red);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+    }
+
+    .section {
+      padding: clamp(54px, 8vw, 96px) clamp(18px, 5vw, 72px);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      max-width: 670px;
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .section-heading p {
+      max-width: 430px;
+      color: var(--muted);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .menu-card {
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 12px 34px rgba(75, 42, 18, 0.09);
+    }
+
+    .menu-card figure {
+      height: 230px;
+    }
+
+    .menu-card div {
+      padding: 20px;
+    }
+
+    .menu-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+      letter-spacing: -0.04em;
+    }
+
+    .menu-card p {
+      min-height: 52px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .menu-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      color: var(--green);
+      background: rgba(61, 122, 75, 0.1);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .small-price {
+      color: var(--red);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .info-band {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      margin-top: 26px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .info-item {
+      min-height: 130px;
+      padding: 22px;
+      background: #fffaf2;
+    }
+
+    .info-item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+
+    .info-item span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .order-section {
+      display: grid;
+      grid-template-columns: 0.85fr 1fr;
+      gap: clamp(26px, 5vw, 70px);
+      align-items: center;
+      background: var(--ink);
+      color: #fff8ed;
+    }
+
+    .order-section p {
+      margin: 18px 0 26px;
+      color: rgba(255, 248, 237, 0.76);
+    }
+
+    .order-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+    }
+
+    .step-number {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      color: var(--ink);
+      background: var(--gold);
+      border-radius: 14px;
+      font-weight: 900;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 26px clamp(18px, 5vw, 72px);
+      color: var(--muted);
+      background: #fff8ed;
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      nav a {
+        display: none;
+      }
+
+      .hero,
+      .order-section {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: auto;
+      }
+
+      .menu-grid,
+      .info-band {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      header {
+        align-items: flex-start;
+      }
+
+      .brand span:last-child {
+        max-width: 120px;
+        line-height: 1.1;
+      }
+
+      .order-link {
+        min-height: 40px;
+        padding: 0 14px;
+        font-size: 0.88rem;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-card {
+        border-radius: 18px;
+      }
+
+      .hero-note,
+      .section-heading,
+      footer {
+        display: block;
+      }
+
+      .price {
+        margin-top: 8px;
+      }
+
+      .menu-grid,
+      .info-band {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="#">
+      <span class="brand-mark">GR</span>
+      <span>Golden Roost Chicken</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#menu">Menu</a>
+      <a href="#delivery">Delivery</a>
+      <a href="#order">How to Order</a>
+      <a class="order-link" href="https://wa.me/60123456789">Order Now</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Freshly cooked daily</span>
+        <h1>Juicy chicken, hot from the kitchen.</h1>
+        <p>
+          Crispy fried chicken, tender roasted chicken, and family meal boxes made
+          for lunch, dinner, parties, and hungry days that need something proper.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="https://wa.me/60123456789">Order on WhatsApp</a>
+          <a class="button secondary" href="#menu">View Menu</a>
+        </div>
+      </div>
+
+      <article class="hero-card" aria-label="Signature roasted chicken">
+        <figure class="hero-image">
+          <img src="https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=1400&q=85" alt="Crispy golden fried chicken served hot">
+        </figure>
+        <div class="hero-note">
+          <div>
+            <strong>Signature Chicken Box</strong>
+            <p>8 pieces, fries, coleslaw, and two sauces.</p>
+          </div>
+          <span class="price">RM 38</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="section-heading">
+        <h2>Best sellers for every appetite.</h2>
+        <p>Choose individual meals, sharing boxes, or whole chickens. All orders are cooked fresh and packed warm.</p>
+      </div>
+
+      <div class="menu-grid">
+        <article class="menu-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=900&q=85" alt="Golden fried chicken pieces with dipping sauce">
+          </figure>
+          <div>
+            <h3>Crispy Fried Chicken</h3>
+            <p>Crunchy outside, juicy inside, seasoned with our house spice blend.</p>
+            <div class="menu-bottom">
+              <span class="tag">Customer favorite</span>
+              <span class="small-price">RM 12.90</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=900&q=85" alt="Roasted chicken served with herbs and vegetables">
+          </figure>
+          <div>
+            <h3>Herb Roasted Chicken</h3>
+            <p>Slow roasted with garlic, herbs, and a glossy savoury glaze.</p>
+            <div class="menu-bottom">
+              <span class="tag">Whole chicken</span>
+              <span class="small-price">RM 45</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=900&q=85" alt="Chicken wings coated in sauce">
+          </figure>
+          <div>
+            <h3>Spicy Wings</h3>
+            <p>Sticky, spicy wings tossed in chili honey sauce and sesame.</p>
+            <div class="menu-bottom">
+              <span class="tag">6 pieces</span>
+              <span class="small-price">RM 18</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="info-band" id="delivery">
+        <div class="info-item">
+          <strong>Pickup</strong>
+          <span>Ready in 20-30 minutes after confirmation.</span>
+        </div>
+        <div class="info-item">
+          <strong>Delivery</strong>
+          <span>Available within 8 km from our kitchen.</span>
+        </div>
+        <div class="info-item">
+          <strong>Party Orders</strong>
+          <span>Pre-order family boxes and trays one day ahead.</span>
+        </div>
+        <div class="info-item">
+          <strong>Opening Hours</strong>
+          <span>Daily, 11:00 AM - 9:30 PM.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section order-section" id="order">
+      <div>
+        <span class="eyebrow">Simple ordering</span>
+        <h2>Hot chicken in three easy steps.</h2>
+        <p>
+          Message us your order, choose pickup or delivery, then wait for the good
+          smell to arrive. For big orders, tell us your date and number of guests.
+        </p>
+        <a class="button" href="https://wa.me/60123456789">WhatsApp 012-345 6789</a>
+      </div>
+
+      <div class="order-panel">
+        <article class="step">
+          <span class="step-number">1</span>
+          <div>
+            <strong>Pick your chicken</strong>
+            <p>Choose fried chicken, roasted chicken, wings, or a family box.</p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">2</span>
+          <div>
+            <strong>Send your details</strong>
+            <p>Share your name, pickup time or delivery address, and payment method.</p>
+          </div>
+        </article>
+        <article class="step">
+          <span class="step-number">3</span>
+          <div>
+            <strong>Enjoy it fresh</strong>
+            <p>We cook after confirmation so every box leaves the kitchen hot.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Golden Roost Chicken, Kuala Lumpur</span>
+    <span>Fresh chicken meals for pickup, delivery, and events.</span>
+  </footer>
+</body>
+</html>
